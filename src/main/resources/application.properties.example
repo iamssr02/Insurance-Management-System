@@ -1,0 +1,5 @@
+spring.application.name=insurance Management System
+spring.datasource.url=jdbc:postgresql://localhost:5432/InsuranceManagementSystem
+spring.datasource.username=YOUR_POSTGRES_USERNAME
+spring.datasource.password=YOUR_PASSWORD
+spring.jpa.hibernate.ddl-auto=update
