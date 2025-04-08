@@ -1,6 +1,6 @@
 package com.example.insuranceManagementSystem.servicesImpl;
 
-import com.example.insuranceManagementSystem.dto.PolicyDTO;
+import com.example.insuranceManagementSystem.postDto.PolicyGetDTO;
 import com.example.insuranceManagementSystem.models.PolicyEntity;
 import com.example.insuranceManagementSystem.repositories.PolicyRepository;
 import com.example.insuranceManagementSystem.services.PolicyService;
@@ -19,7 +19,7 @@ public class PolicyServiceImpl implements PolicyService {
     private PolicyRepository policyRepository;
 
     @Override
-    public PolicyDTO createPolicy(PolicyDTO dto) {
+    public PolicyGetDTO createPolicy(PolicyGetDTO dto) {
         if (policyRepository.existsByPolicyName(dto.getPolicyName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Policy name already exists");
         }
@@ -28,7 +28,7 @@ public class PolicyServiceImpl implements PolicyService {
     }
 
     @Override
-    public PolicyDTO updatePolicy(Long id, PolicyDTO dto) {
+    public PolicyGetDTO updatePolicy(Long id, PolicyGetDTO dto) {
         PolicyEntity existing = policyRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Policy not found"));
 
@@ -55,20 +55,20 @@ public class PolicyServiceImpl implements PolicyService {
     }
 
     @Override
-    public PolicyDTO getPolicyById(Long id) {
+    public PolicyGetDTO getPolicyById(Long id) {
         return policyRepository.findById(id)
                 .map(this::mapToDTO)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Policy not found"));
     }
 
     @Override
-    public List<PolicyDTO> getAllPolicies() {
+    public List<PolicyGetDTO> getAllPolicies() {
         return policyRepository.findAll().stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
-    private PolicyEntity mapToEntity(PolicyDTO dto) {
+    private PolicyEntity mapToEntity(PolicyGetDTO dto) {
         return PolicyEntity.builder()
                 .policyName(dto.getPolicyName())
                 .policyType(dto.getPolicyType())
@@ -80,8 +80,9 @@ public class PolicyServiceImpl implements PolicyService {
                 .build();
     }
 
-    private PolicyDTO mapToDTO(PolicyEntity entity) {
-        return PolicyDTO.builder()
+    private PolicyGetDTO mapToDTO(PolicyEntity entity) {
+        return PolicyGetDTO.builder()
+                .id(entity.getPolicyId())
                 .policyName(entity.getPolicyName())
                 .policyType(entity.getPolicyType())
                 .premium(entity.getPremium())

@@ -21,6 +21,9 @@ public class ClaimEntity {
     @Column(name = "claim_id")
     private Long claimId;
 
+    @Column(name="claim_name")
+    private String claimName;
+
     @ManyToOne
     @JoinColumn(name = "policy_id", nullable = false)
     private PolicyEntity policy;

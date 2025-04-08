@@ -1,7 +1,8 @@
 package com.example.insuranceManagementSystem.controllers;
 
+import com.example.insuranceManagementSystem.getDto.HospitalGetDTO;
 import com.example.insuranceManagementSystem.services.HospitalService;
-import com.example.insuranceManagementSystem.dto.HospitalDTO;
+import com.example.insuranceManagementSystem.postDto.HospitalPostDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,24 +17,24 @@ public class HospitalController {
     private HospitalService hospitalService;
 
     @PostMapping
-    public ResponseEntity<HospitalDTO> createHospital(@RequestBody HospitalDTO hospitalDTO) {
-        HospitalDTO created = hospitalService.createHospital(hospitalDTO);
+    public ResponseEntity<HospitalPostDTO> createHospital(@RequestBody HospitalPostDTO hospitalPostDTO) {
+        HospitalPostDTO created = hospitalService.createHospital(hospitalPostDTO);
         return ResponseEntity.status(201).body(created);
     }
 
     @GetMapping
-    public ResponseEntity<List<HospitalDTO>> getAllHospitals() {
+    public ResponseEntity<List<HospitalGetDTO>> getAllHospitals() {
         return ResponseEntity.ok(hospitalService.getAllHospitals());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<HospitalDTO> getHospitalById(@PathVariable Long id) {
+    public ResponseEntity<HospitalGetDTO> getHospitalById(@PathVariable Long id) {
         return ResponseEntity.ok(hospitalService.getHospitalById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<HospitalDTO> updateHospital(@PathVariable Long id, @RequestBody HospitalDTO hospitalDTO) {
-        return ResponseEntity.ok(hospitalService.updateHospital(id, hospitalDTO));
+    public ResponseEntity<HospitalPostDTO> updateHospital(@PathVariable Long id, @RequestBody HospitalPostDTO hospitalPostDTO) {
+        return ResponseEntity.ok(hospitalService.updateHospital(id, hospitalPostDTO));
     }
 
     @DeleteMapping("/{id}")

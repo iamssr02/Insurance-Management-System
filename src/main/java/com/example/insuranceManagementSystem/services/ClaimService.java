@@ -1,12 +1,13 @@
 package com.example.insuranceManagementSystem.services;
 
-import com.example.insuranceManagementSystem.dto.ClaimDTO;
+import com.example.insuranceManagementSystem.getDto.ClaimGetDTO;
+import com.example.insuranceManagementSystem.postDto.ClaimPostDTO;
 import java.util.List;
 
 public interface ClaimService {
-    ClaimDTO createClaim(ClaimDTO dto);
-    ClaimDTO updateClaimStatus(Long id, String status);
-    List<ClaimDTO> getAllClaims();
-    ClaimDTO getClaimById(Long id);
+    ClaimPostDTO createClaim(ClaimPostDTO dto);
+    ClaimPostDTO updateClaimStatus(Long id, String status);
+    List<ClaimGetDTO> getAllClaims();
+    ClaimGetDTO getClaimById(Long id);
     void deleteClaim(Long id);
 }

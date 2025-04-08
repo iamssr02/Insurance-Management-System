@@ -1,13 +1,14 @@
 package com.example.insuranceManagementSystem.services;
 
-import com.example.insuranceManagementSystem.dto.HospitalDTO;
+import com.example.insuranceManagementSystem.getDto.HospitalGetDTO;
+import com.example.insuranceManagementSystem.postDto.HospitalPostDTO;
 
 import java.util.List;
 
 public interface HospitalService {
-    HospitalDTO createHospital(HospitalDTO hospitalDTO);
-    HospitalDTO updateHospital(Long id, HospitalDTO hospitalDTO);
+    HospitalPostDTO createHospital(HospitalPostDTO hospitalPostDTO);
+    HospitalPostDTO updateHospital(Long id, HospitalPostDTO hospitalPostDTO);
     void deleteHospital(Long id);
-    HospitalDTO getHospitalById(Long id);
-    List<HospitalDTO> getAllHospitals();
+    HospitalGetDTO getHospitalById(Long id);
+    List<HospitalGetDTO> getAllHospitals();
 }

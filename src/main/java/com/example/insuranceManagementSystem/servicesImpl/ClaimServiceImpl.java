@@ -1,6 +1,7 @@
 package com.example.insuranceManagementSystem.servicesImpl;
 
-import com.example.insuranceManagementSystem.dto.ClaimDTO;
+import com.example.insuranceManagementSystem.getDto.ClaimGetDTO;
+import com.example.insuranceManagementSystem.postDto.ClaimPostDTO;
 import com.example.insuranceManagementSystem.models.ClaimEntity;
 import com.example.insuranceManagementSystem.models.HospitalEntity;
 import com.example.insuranceManagementSystem.models.PolicyEntity;
@@ -30,7 +31,7 @@ public class ClaimServiceImpl implements ClaimService {
     private HospitalRepository hospitalRepository;
 
     @Override
-    public ClaimDTO createClaim(ClaimDTO dto) {
+    public ClaimPostDTO createClaim(ClaimPostDTO dto) {
         PolicyEntity policy = policyRepository.findById(dto.getPolicyId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Policy not found"));
         HospitalEntity hospital = hospitalRepository.findById(dto.getHospitalId())
@@ -40,36 +41,37 @@ public class ClaimServiceImpl implements ClaimService {
                 .createdAt(LocalDateTime.now())
                 .policy(policy)
                 .hospital(hospital)
+                .claimName(dto.getClaimName())
                 .remarks(dto.getRemarks())
                 .status("PENDING")
                 .build();
 
         ClaimEntity saved = claimRepository.save(entity);
-        return mapToDTO(saved);
+        return postMapToDTO(saved);
     }
 
     @Override
-    public ClaimDTO updateClaimStatus(Long id, String status) {
+    public ClaimPostDTO updateClaimStatus(Long id, String status) {
         ClaimEntity existing = claimRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Claim not found"));
 
         existing.setStatus(status);
         ClaimEntity updated = claimRepository.save(existing);
-        return mapToDTO(updated);
+        return postMapToDTO(updated);
     }
 
     @Override
-    public List<ClaimDTO> getAllClaims() {
+    public List<ClaimGetDTO> getAllClaims() {
         return claimRepository.findAll().stream()
-                .map(this::mapToDTO)
+                .map(this::getMapToDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public ClaimDTO getClaimById(Long id) {
+    public ClaimGetDTO getClaimById(Long id) {
         ClaimEntity entity = claimRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Claim not found"));
-        return mapToDTO(entity);
+        return getMapToDTO(entity);
     }
 
     @Override
@@ -79,10 +81,22 @@ public class ClaimServiceImpl implements ClaimService {
         claimRepository.delete(existing);
     }
 
-    private ClaimDTO mapToDTO(ClaimEntity entity) {
-        return ClaimDTO.builder()
+    private ClaimGetDTO getMapToDTO(ClaimEntity entity) {
+        return ClaimGetDTO.builder()
+                .claimId(entity.getClaimId())
                 .policyId(entity.getPolicy().getPolicyId())
                 .hospitalId(entity.getHospital().getHospitalId())
+                .claimName(entity.getClaimName())
+                .createdAt(entity.getCreatedAt())
+                .remarks(entity.getRemarks())
+                .status(entity.getStatus())
+                .build();
+    }
+    private ClaimPostDTO postMapToDTO(ClaimEntity entity) {
+        return ClaimPostDTO.builder()
+                .policyId(entity.getPolicy().getPolicyId())
+                .hospitalId(entity.getHospital().getHospitalId())
+                .claimName(entity.getClaimName())
                 .remarks(entity.getRemarks())
                 .status(entity.getStatus())
                 .build();

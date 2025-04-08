@@ -1,4 +1,4 @@
-package com.example.insuranceManagementSystem.dto;
+package com.example.insuranceManagementSystem.getDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,10 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PolicyDTO {
+@Builder
+public class PolicyGetDTO {
+    private Long id;
     private String policyName;
     private String policyType;
     private Double premium;

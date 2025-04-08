@@ -1,6 +1,7 @@
 package com.example.insuranceManagementSystem.servicesImpl;
 
-import com.example.insuranceManagementSystem.dto.HospitalDTO;
+import com.example.insuranceManagementSystem.getDto.HospitalGetDTO;
+import com.example.insuranceManagementSystem.postDto.HospitalPostDTO;
 import com.example.insuranceManagementSystem.models.HospitalEntity;
 import com.example.insuranceManagementSystem.repositories.HospitalRepository;
 import com.example.insuranceManagementSystem.services.HospitalService;
@@ -19,17 +20,17 @@ public class HospitalServiceImpl implements HospitalService {
     private HospitalRepository hospitalRepository;
 
     @Override
-    public HospitalDTO createHospital(HospitalDTO dto) {
+    public HospitalPostDTO createHospital(HospitalPostDTO dto) {
         if (hospitalRepository.existsByContactEmail(dto.getContactEmail())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already in use");
         }
         HospitalEntity entity = mapToEntity(dto);
         HospitalEntity saved = hospitalRepository.save(entity);
-        return mapToDTO(saved);
+        return postMapToDTO(saved);
     }
 
     @Override
-    public HospitalDTO updateHospital(Long id, HospitalDTO dto) {
+    public HospitalPostDTO updateHospital(Long id, HospitalPostDTO dto) {
         HospitalEntity existing = hospitalRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Hospital not found"));
         if (!existing.getContactEmail().equals(dto.getContactEmail()) &&
@@ -42,7 +43,7 @@ public class HospitalServiceImpl implements HospitalService {
         existing.setPhoneNumber(dto.getPhoneNumber());
         existing.setDiscount(dto.getDiscount());
         HospitalEntity updated = hospitalRepository.save(existing);
-        return mapToDTO(updated);
+        return postMapToDTO(updated);
     }
 
     @Override
@@ -53,20 +54,20 @@ public class HospitalServiceImpl implements HospitalService {
     }
 
     @Override
-    public HospitalDTO getHospitalById(Long id) {
+    public HospitalGetDTO getHospitalById(Long id) {
         HospitalEntity entity = hospitalRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Hospital not found"));
-        return mapToDTO(entity);
+        return getMapToDTO(entity);
     }
 
     @Override
-    public List<HospitalDTO> getAllHospitals() {
+    public List<HospitalGetDTO> getAllHospitals() {
         return hospitalRepository.findAll().stream()
-                .map(this::mapToDTO)
+                .map(this::getMapToDTO)
                 .collect(Collectors.toList());
     }
 
-    private HospitalEntity mapToEntity(HospitalDTO dto) {
+    private HospitalEntity mapToEntity(HospitalPostDTO dto) {
         return HospitalEntity.builder()
                 .createdAt(LocalDateTime.now())
                 .name(dto.getName())
@@ -77,8 +78,18 @@ public class HospitalServiceImpl implements HospitalService {
                 .build();
     }
 
-    private HospitalDTO mapToDTO(HospitalEntity entity) {
-        return HospitalDTO.builder()
+    private HospitalPostDTO postMapToDTO(HospitalEntity entity) {
+        return HospitalPostDTO.builder()
+                .name(entity.getName())
+                .location(entity.getLocation())
+                .contactEmail(entity.getContactEmail())
+                .phoneNumber(entity.getPhoneNumber())
+                .discount(entity.getDiscount())
+                .build();
+    }
+    private HospitalGetDTO getMapToDTO(HospitalEntity entity) {
+        return HospitalGetDTO.builder()
+                .id(entity.getHospitalId())
                 .name(entity.getName())
                 .location(entity.getLocation())
                 .contactEmail(entity.getContactEmail())

@@ -1,6 +1,7 @@
 package com.example.insuranceManagementSystem.controllers;
 
-import com.example.insuranceManagementSystem.dto.ClaimDTO;
+import com.example.insuranceManagementSystem.getDto.ClaimGetDTO;
+import com.example.insuranceManagementSystem.postDto.ClaimPostDTO;
 import com.example.insuranceManagementSystem.services.ClaimService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +10,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/insurance-management-system/claims")
-
 @CrossOrigin(origins = "http://localhost:4200")
 public class ClaimController {
 
@@ -17,22 +17,22 @@ public class ClaimController {
     private ClaimService claimService;
 
     @PostMapping
-    public ClaimDTO createClaim(@RequestBody ClaimDTO dto) {
+    public ClaimPostDTO createClaim(@RequestBody ClaimPostDTO dto) {
         return claimService.createClaim(dto);
     }
 
     @PutMapping("/{id}")
-    public ClaimDTO updateStatus(@PathVariable Long id, @RequestParam String status) {
+    public ClaimPostDTO updateStatus(@PathVariable Long id, @RequestParam String status) {
         return claimService.updateClaimStatus(id, status);
     }
 
     @GetMapping
-    public List<ClaimDTO> getAllClaims() {
+    public List<ClaimGetDTO> getAllClaims() {
         return claimService.getAllClaims();
     }
 
     @GetMapping("/{id}")
-    public ClaimDTO getClaimById(@PathVariable Long id) {
+    public ClaimGetDTO getClaimById(@PathVariable Long id) {
         return claimService.getClaimById(id);
     }
 

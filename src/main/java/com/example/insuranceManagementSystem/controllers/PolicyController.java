@@ -1,6 +1,6 @@
 package com.example.insuranceManagementSystem.controllers;
 
-import com.example.insuranceManagementSystem.dto.PolicyDTO;
+import com.example.insuranceManagementSystem.postDto.PolicyGetDTO;
 import com.example.insuranceManagementSystem.services.PolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,22 +15,22 @@ public class PolicyController {
     private PolicyService policyService;
 
     @PostMapping
-    public PolicyDTO createPolicy(@RequestBody PolicyDTO dto) {
+    public PolicyGetDTO createPolicy(@RequestBody PolicyGetDTO dto) {
         return policyService.createPolicy(dto);
     }
 
     @GetMapping("/{id}")
-    public PolicyDTO getPolicyById(@PathVariable Long id) {
+    public PolicyGetDTO getPolicyById(@PathVariable Long id) {
         return policyService.getPolicyById(id);
     }
 
     @GetMapping
-    public List<PolicyDTO> getAllPolicies() {
+    public List<PolicyGetDTO> getAllPolicies() {
         return policyService.getAllPolicies();
     }
 
     @PutMapping("/{id}")
-    public PolicyDTO updatePolicy(@PathVariable Long id, @RequestBody PolicyDTO dto) {
+    public PolicyGetDTO updatePolicy(@PathVariable Long id, @RequestBody PolicyGetDTO dto) {
         return policyService.updatePolicy(id, dto);
     }
 
