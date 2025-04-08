@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/insurance-management-system/policy")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PolicyController {
     @Autowired
     private PolicyService policyService;
