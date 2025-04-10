@@ -1,7 +1,7 @@
 package com.example.insuranceManagementSystem.services;
 
-import com.example.insuranceManagementSystem.getDto.ClaimGetDTO;
-import com.example.insuranceManagementSystem.postDto.ClaimPostDTO;
+import com.example.insuranceManagementSystem.dto.getDto.ClaimGetDTO;
+import com.example.insuranceManagementSystem.dto.postDto.ClaimPostDTO;
 import java.util.List;
 
 public interface ClaimService {

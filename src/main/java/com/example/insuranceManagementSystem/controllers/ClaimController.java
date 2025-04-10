@@ -1,7 +1,7 @@
 package com.example.insuranceManagementSystem.controllers;
 
-import com.example.insuranceManagementSystem.getDto.ClaimGetDTO;
-import com.example.insuranceManagementSystem.postDto.ClaimPostDTO;
+import com.example.insuranceManagementSystem.dto.getDto.ClaimGetDTO;
+import com.example.insuranceManagementSystem.dto.postDto.ClaimPostDTO;
 import com.example.insuranceManagementSystem.services.ClaimService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

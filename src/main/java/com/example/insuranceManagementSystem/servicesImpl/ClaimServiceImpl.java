@@ -1,7 +1,7 @@
 package com.example.insuranceManagementSystem.servicesImpl;
 
-import com.example.insuranceManagementSystem.getDto.ClaimGetDTO;
-import com.example.insuranceManagementSystem.postDto.ClaimPostDTO;
+import com.example.insuranceManagementSystem.dto.getDto.ClaimGetDTO;
+import com.example.insuranceManagementSystem.dto.postDto.ClaimPostDTO;
 import com.example.insuranceManagementSystem.models.ClaimEntity;
 import com.example.insuranceManagementSystem.models.HospitalEntity;
 import com.example.insuranceManagementSystem.models.PolicyEntity;

@@ -1,8 +1,8 @@
 package com.example.insuranceManagementSystem.controllers;
 
-import com.example.insuranceManagementSystem.getDto.HospitalGetDTO;
+import com.example.insuranceManagementSystem.dto.getDto.HospitalGetDTO;
 import com.example.insuranceManagementSystem.services.HospitalService;
-import com.example.insuranceManagementSystem.postDto.HospitalPostDTO;
+import com.example.insuranceManagementSystem.dto.postDto.HospitalPostDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.example.insuranceManagementSystem.postDto;
+package com.example.insuranceManagementSystem.dto.getDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,12 +11,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ClaimPostDTO {
+public class ClaimGetDTO {
     private Long claimId;
     private Long policyId;
     private Long hospitalId;
-    private LocalDateTime createdAt;
     private String claimName;
+    private LocalDateTime createdAt;
     private String remarks;
     private String status;
 }

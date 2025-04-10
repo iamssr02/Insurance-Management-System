@@ -1,7 +1,7 @@
 package com.example.insuranceManagementSystem.services;
 
-import com.example.insuranceManagementSystem.getDto.HospitalGetDTO;
-import com.example.insuranceManagementSystem.postDto.HospitalPostDTO;
+import com.example.insuranceManagementSystem.dto.getDto.HospitalGetDTO;
+import com.example.insuranceManagementSystem.dto.postDto.HospitalPostDTO;
 
 import java.util.List;
 

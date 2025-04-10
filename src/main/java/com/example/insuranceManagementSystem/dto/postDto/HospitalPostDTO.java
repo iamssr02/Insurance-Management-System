@@ -1,4 +1,4 @@
-package com.example.insuranceManagementSystem.getDto;
+package com.example.insuranceManagementSystem.dto.postDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class HospitalGetDTO {
-    private Long id;
+public class HospitalPostDTO {
     private String name;
     private String location;
     private String contactEmail;

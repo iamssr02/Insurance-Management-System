@@ -1,6 +1,6 @@
 package com.example.insuranceManagementSystem.servicesImpl;
 
-import com.example.insuranceManagementSystem.postDto.PolicyGetDTO;
+import com.example.insuranceManagementSystem.dto.postDto.PolicyGetDTO;
 import com.example.insuranceManagementSystem.models.PolicyEntity;
 import com.example.insuranceManagementSystem.repositories.PolicyRepository;
 import com.example.insuranceManagementSystem.services.PolicyService;

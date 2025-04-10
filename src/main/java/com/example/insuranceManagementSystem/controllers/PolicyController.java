@@ -1,6 +1,6 @@
 package com.example.insuranceManagementSystem.controllers;
 
-import com.example.insuranceManagementSystem.postDto.PolicyGetDTO;
+import com.example.insuranceManagementSystem.dto.postDto.PolicyGetDTO;
 import com.example.insuranceManagementSystem.services.PolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
