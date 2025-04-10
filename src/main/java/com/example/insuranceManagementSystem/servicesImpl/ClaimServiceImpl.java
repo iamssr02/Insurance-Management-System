@@ -94,9 +94,11 @@ public class ClaimServiceImpl implements ClaimService {
     }
     private ClaimPostDTO postMapToDTO(ClaimEntity entity) {
         return ClaimPostDTO.builder()
+                .claimId(entity.getClaimId())
                 .policyId(entity.getPolicy().getPolicyId())
                 .hospitalId(entity.getHospital().getHospitalId())
                 .claimName(entity.getClaimName())
+                .createdAt(entity.getCreatedAt())
                 .remarks(entity.getRemarks())
                 .status(entity.getStatus())
                 .build();
